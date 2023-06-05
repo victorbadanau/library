@@ -1,0 +1,119 @@
+/* Header font text */
+@font-face {
+   font-family: "MarcellusSC";
+   src: url(fonts/MarcellusSC.ttf);
+}
+
+/* main font text */
+@font-face {
+   font-family: "Quicksand";
+   src: url(fonts/Quicksand.ttf);
+}
+
+/* book font text */
+@font-face {
+   font-family: "LibreFranklin";
+   src: url(fonts/LibreFranklin.ttf);
+}
+
+/* colors */
+:root {
+   --white: #F7F1F0;
+   --cream: #E9C1AF;
+}
+
+body {
+   box-sizing: border-box;
+   width: 100vw;
+   height: 100vh;
+   margin: 0;
+   padding: 0;
+   display: grid;
+   grid-template-rows: 1fr 10fr 1fr;
+}
+
+
+/* Header */
+header {
+   display: grid;
+   background-color: var(--cream);
+   justify-content: center;
+   align-content: center;
+   font-size: 1.5em;
+   font-family: "MarcellusSC", Impact, 'Arial Narrow Bold', sans-serif;
+}
+
+header h1 {
+   margin: 0;
+   padding: 0.5em;
+}
+
+/* Main */
+main {
+   display: grid;
+   grid-template-rows: 1fr 10fr;
+}
+
+main table {
+   padding: 1em;
+   margin: 1em;
+   align-self: start;
+}
+
+/* Footer */
+footer {
+   display: grid;
+   background-color: var(--cream);
+   justify-content: center;
+   align-items: center;
+}
+
+footer .made-by {
+   font-size: 1.25em;
+   display: grid;
+   grid-template-columns: 4fr 1fr 1fr;
+   align-items: center;
+   justify-items: center;
+}
+
+.made-by p {
+   padding: 0 0.5em;
+}
+
+/* project-info */
+.project-info {
+   cursor: pointer;
+   justify-self: center;
+}
+
+.project-info .summary-info {
+   visibility: hidden;
+   padding: 10px;
+   position: absolute;
+   background-color: lightblue;
+   text-align: center;
+   color: black;
+   border-radius: 2px;
+   z-index: 1;
+   bottom: 20%;
+}
+
+.project-info:hover .summary-info {
+   visibility: visible;
+}
+
+  /* github links */
+.fa-github, .fa-code {
+   color: #222222;
+   font-size: 24px;
+   transition: transform 0.4s ease-in-out;
+   cursor: default;
+}
+  
+.fa-github:hover{
+   transform: rotate(360deg) scale(1.25);
+}
+
+.fa-code:hover {
+   transform: scale(1.25);
+}
