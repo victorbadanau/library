@@ -18,16 +18,31 @@
     </header>
 
     <main>
-        <button class="add-book">+ Add Book</button>
-        <table>
-            <tr class="table-header">
-                <th>TITLE</th>
-                <th>AUTHOR</th>
-                <th>PAGES</th>
-                <th>STATUS</th>
-                <th>DELETE</th>
-            </tr>
-        </table>
+        <section class="main">
+            <table class="book-table">
+                <tr class="table-header">
+                    <th>TITLE</th>
+                    <th>AUTHOR</th>
+                    <th>PAGES</th>
+                    <th>STATUS</th>
+                    <th>REMOVE</th>
+                </tr>
+            </table>
+            <div class="info">
+                <button class="add-book">+ ADD BOOK</button>
+                <p>READ:</p>
+                <span class="count books-read"></span>  
+                <!--<i class="fa-regular fa-circle-check"></i>
+                    <i class="fa-regular fa-circle-xmark"></i>
+                    <i class="fa-regular fa-trash-can"></i>
+                -->
+                <p>NOT READ:</p>
+                <span class="count books-not-read"></span>
+                <p>TOTAL:</p>
+                <span class="count books-total"></span>
+                <button type="button" class="delete-all">DELETE ALL BOOKS</button>
+            </div>
+        </section>
     </main>
 
     <footer>
