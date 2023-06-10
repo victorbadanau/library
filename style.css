@@ -18,8 +18,14 @@
 
 /* colors */
 :root {
-   --white: #F7F1F0;
-   --cream: #E9C1AF;
+   --modal: #dad2d1;
+   --green: #55a254;
+   --red: #bb4951;
+   --header: #c0b6b3;
+   --footer: var(--header);
+   --main: #e8e7e7;
+   --table: var(--header);
+   --text: #342009;
 }
 
 button,
@@ -51,7 +57,7 @@ body {
 /* Header */
 header {
    display: grid;
-   background-color: var(--cream);
+   background-color: var(--header);
    justify-content: center;
    align-content: center;
    font-size: 1.25em;
@@ -67,6 +73,7 @@ header h1 {
 main {
    display: grid;
    grid-template-rows: 4em 1fr;
+   background-color: var(--main);
 }
 
 table {
@@ -81,15 +88,16 @@ table {
 }
 
 table thead .table-head {
-   background-color: lightskyblue;
+   background-color: var(--table);
 }
 
 tbody tr {
-   border-bottom: 0.15em solid lightskyblue;
+   border-bottom: 0.15em solid var(--table);
 }
 
 th {
    padding: 1em;
+   width: 20%;
 }
 
 td {
@@ -98,13 +106,21 @@ td {
 }
 
 i.fa-circle-check {
-   color: green;
+   color: var(--green);
    letter-spacing: 0.1em;
 }
 
+.fa-circle-check::after {
+   content: " read";
+}
+
 i.fa-circle-xmark, i.fa-trash-can {
-   color: red;
+   color: var(--red);
    letter-spacing: 0.1em;
+}
+
+.fa-circle-xmark::after {
+   content: " not read";
 }
 
 .info {
@@ -119,6 +135,18 @@ i.fa-circle-xmark, i.fa-trash-can {
    font-family: "main", Impact, 'Arial Narrow Bold', sans-serif;
 }
 
+.stats {
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   align-items: center;
+   justify-items: center;
+}
+
+.stats p {
+   width: 7.5em;
+   text-align: center;
+}
+
 button.add-book {
    font-size: 1em;
    margin: 1em 0;
@@ -126,7 +154,7 @@ button.add-book {
    border-radius: 0.75em;
    width: fit-content;
    height: fit-content;
-   background-color: lightgreen;
+   background-color: var(--green);
 }
 
 .count {
@@ -139,11 +167,65 @@ button.delete-all {
   border-radius: 0.75em;
   width: fit-content;
   height: fit-content;
-  background-color: lightcoral;
+  background-color: var(--red);
+}
+
+button:active {
+   transform: translateY(0.15em);
+}
+
+button:hover {
+   filter: brightness(85%);
+}
+
+.close-modal {
+   background-color: var(--modal);
+   border-radius: 1em;
+   position: fixed;
+   width: 450px;
+   height: 150px;
+   z-index: 1;
+   top: 25%;
+   left: 50%;
+   font-family: "main", Impact, 'Arial Narrow Bold', sans-serif;
+   transform: translate(-50%, -50%) scale(0);
+   transition: 0.2s ease-in-out;
+}
+
+.content {
+   width: 100%;
+   height: 100%;
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   justify-items: center;
+   align-items: center;
+   font-family: "main", Impact, 'Arial Narrow Bold', sans-serif;
+   font-weight: 500;
+}
+
+.content p {
+   grid-column: span 3;
+   font-size: 1.15em;
+}
+
+.content .cancel {
+   grid-column: 2;
+   justify-self: end;
+   background-color: var(--modal);
+   filter: brightness(85%);
+}
+
+.content .delete {
+   background-color: var(--red);
+}
+
+.content button {
+   padding: 0.5em 1em;
+   border-radius: 0.5em;
 }
 
 .modal {
-   background-color: lightgray;
+   background-color: var(--modal);
    border-radius: 1em;
    height: 400px;
    width: 300px;
@@ -156,7 +238,7 @@ button.delete-all {
    transition: 0.2s ease-in-out;
 }
 
-.modal.active {
+.modal.active, .close-modal.active {
    transform: translate(-50%, -50%) scale(1);
  }
 
@@ -211,14 +293,14 @@ button.delete-all {
 .submit-book {
    padding: 0.75em 2em;
    border-radius: 0.5em;
-   background-color: lightgreen;
+   background-color: var(--green);
 }
 
 
 /* Footer */
 footer {
    display: grid;
-   background-color: var(--cream);
+   background-color: var(--footer);
    justify-content: center;
    align-items: center;
 }
@@ -246,13 +328,14 @@ footer .made-by {
    visibility: hidden;
    padding: 1em;
    position: absolute;
-   background-color: lightblue;
+   background-color: var(--modal);
    text-align: center;
    color: black;
    border-radius: 0.5em;
    z-index: 1;
    bottom: 10%;
-   right: 22%;
+   right: calc(50% - 10vw);
+   width: 20%;
 }
 
 .project-info:hover .summary-info {

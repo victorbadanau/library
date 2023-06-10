@@ -39,11 +39,9 @@ function displayBooks() {
         const statusSymbol = document.createElement("i");
         if (myLibrary[i].read === false) {
             statusSymbol.classList.add("fa-regular", "fa-circle-xmark");
-            statusSymbol.textContent = " not read";
         }
         else {
             statusSymbol.classList.add("fa-regular", "fa-circle-check");
-            statusSymbol.textContent = " read";
         }
         bookStatus.appendChild(statusSymbol);
         bookRow.appendChild(bookStatus);
@@ -65,14 +63,14 @@ function displayStats() {
     readBooks.textContent = 0;
     notReadBooks.textContent = 0;
     for (let i = 0; i < myLibrary.length; i++) {
-        if (myLibrary[i].read === false) {
-            notReadCount += 1;
-            notReadBooks.textContent = notReadCount;
-            readCount -= 1;
+        if (myLibrary[i].read === true) {
+            readCount += 1;
             readBooks.textContent = readCount;
         }
-        readCount += 1;
-        readBooks.textContent = readCount;
+        else if (myLibrary[i].read === false) {
+            notReadCount += 1;
+            notReadBooks.textContent = notReadCount;
+        }
     }
     totalBooks.textContent = myLibrary.length;
 }
@@ -99,6 +97,7 @@ const addBookModal = document.querySelector(".modal");
 const addBookForm = document.querySelector("#addBookForm");
 const allInputs = document.querySelectorAll("input");
 const submitButton = document.querySelector("#submit-button");
+const addCloseModal = document.querySelector(".close-modal");
 
 function clearForm() {
     title.value = "";
@@ -108,7 +107,6 @@ function clearForm() {
 }
 
 const openAddBookModal = () => {
-    // addBookForm.reset();
     addBookModal.classList.add('active');
     overlay.classList.add('active');
   }
@@ -118,40 +116,64 @@ const closeAddBookModal = () => {
     overlay.classList.remove('active');
 }
 
+const openCloseModal = () => {
+    addCloseModal.classList.add('active');
+    overlay.classList.add('active');
+}
+
+const closeCloseModal = () => {
+    addCloseModal.classList.remove('active');
+    overlay.classList.remove('active');
+}
+
 function userControl() {
    document.addEventListener("pointerdown", (event) => {
     const {target} = event;
     const tr = target.parentNode.parentNode.rowIndex - 1;
-    const form = document.querySelector("form");
     if (target.id === "add-book") {
         openAddBookModal();
     }
     else if (target.id === "overlay") {
         closeAddBookModal();
+        closeCloseModal();
     }
-    else if (target.id === "submit-book") {
+    else if (target.id === "cancel") {
+        closeCloseModal();
+    }
+    else if (target.id === "delete") {
+        myLibrary = [];
+        displayStats();
+        displayBooks();
+        closeCloseModal();
+    }
+    else if (target.id === "submit-book" && document.forms.addBook.checkValidity()) {
         validateForm(event);
         displayBooks();
+        closeAddBookModal();
     }
     else if (target.id === "delete-all") {
-        checkModal();
+        openCloseModal();
     }
     else if (target.classList.contains("fa-trash-can")) {
         myLibrary.splice(tr, 1);
+        displayStats();
+        displayBooks();
     }
     else if (target.classList.contains("fa-circle-check")) {
         target.classList.remove("fa-circle-check");
         target.classList.add("fa-circle-xmark");
         myLibrary[tr].read = false;
+        displayStats();
     }
     else if (target.classList.contains("fa-circle-xmark")) {
         target.classList.remove("fa-circle-xmark");
         target.classList.add("fa-circle-check");
         myLibrary[tr].read = true;
+        displayStats();
     }
    });
+  
 }
 
 displayStats();
-displayBooks();
 userControl();
