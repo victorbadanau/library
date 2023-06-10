@@ -1,7 +1,4 @@
-let myLibrary = [{title:"The Hobbit", author:"J.R.R. Tolkien", pages:295, read:true},
-                {title:"God is not great", author:"Christopher Hitchens", pages:307, read:true},
-                {title:"The madness of crowds", author:"Douglas Murray", pages:288, read:false},
-                {title:"The madness of crowds", author:"Douglas Murray", pages:288, read:true}];
+let myLibrary = [];
 
 class Book {
     constructor(title, author, pages, read) {
@@ -15,19 +12,16 @@ class Book {
 function addBookToLibrary(title, author, pages, read) {
     const book = new Book(title, author, pages, read);
     myLibrary.push(book);
-    showLibraryStats();
-}
-
-function insertAfter(newNode, existingNode) {
-    existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
+    displayStats();
 }
 
 function displayBooks() {
-    const bookList = document.querySelector(".book-table")
+    const bookList = document.querySelector(".table-body");
+    bookList.textContent = "";
     for (let i = 0; i < myLibrary.length; i++) {
         const bookRow = document.createElement("tr");
         bookRow.classList.add("book-info");
-        insertAfter(bookRow,  bookList.lastElementChild);
+        bookList.appendChild(bookRow);
         // title
         const bookTitle = document.createElement("td");
         bookTitle.textContent = myLibrary[i].title;
@@ -45,11 +39,11 @@ function displayBooks() {
         const statusSymbol = document.createElement("i");
         if (myLibrary[i].read === false) {
             statusSymbol.classList.add("fa-regular", "fa-circle-xmark");
-            statusSymbol.textContent = " Not Read";
+            statusSymbol.textContent = " not read";
         }
         else {
             statusSymbol.classList.add("fa-regular", "fa-circle-check");
-            statusSymbol.textContent = " Read";
+            statusSymbol.textContent = " read";
         }
         bookStatus.appendChild(statusSymbol);
         bookRow.appendChild(bookStatus);
@@ -62,7 +56,7 @@ function displayBooks() {
     }
 }
 
-function showLibraryStats() {
+function displayStats() {
     const readBooks = document.querySelector(".books-read");
     const notReadBooks = document.querySelector(".books-not-read");
     const totalBooks = document.querySelector(".books-total");
@@ -83,5 +77,81 @@ function showLibraryStats() {
     totalBooks.textContent = myLibrary.length;
 }
 
-showLibraryStats();
-displayBooks()
+const title = document.querySelector("#title");
+const author = document.querySelector("#author");
+const pages = document.querySelector("#pages");
+const read = document.querySelector("#checkbox");
+
+function validateForm(event) {
+    event.preventDefault();
+    if (title.checkValidity && author.value !== "" && pages.value !== "" && pages.value > 0) {
+        if (read.checked) {
+            addBookToLibrary(title.value, author.value, pages.value, true);
+        }
+        else {
+            addBookToLibrary(title.value, author.value, pages.value, false);
+        }
+    }
+    clearForm();
+}
+
+const addBookModal = document.querySelector(".modal");
+const addBookForm = document.querySelector("#addBookForm");
+const allInputs = document.querySelectorAll("input");
+const submitButton = document.querySelector("#submit-button");
+
+function clearForm() {
+    title.value = "";
+    author.value = "";
+    pages.value = "";
+    read.checked = false;
+}
+
+const openAddBookModal = () => {
+    // addBookForm.reset();
+    addBookModal.classList.add('active');
+    overlay.classList.add('active');
+  }
+  
+const closeAddBookModal = () => {
+    addBookModal.classList.remove('active');
+    overlay.classList.remove('active');
+}
+
+function userControl() {
+   document.addEventListener("pointerdown", (event) => {
+    const {target} = event;
+    const tr = target.parentNode.parentNode.rowIndex - 1;
+    const form = document.querySelector("form");
+    if (target.id === "add-book") {
+        openAddBookModal();
+    }
+    else if (target.id === "overlay") {
+        closeAddBookModal();
+    }
+    else if (target.id === "submit-book") {
+        validateForm(event);
+        displayBooks();
+    }
+    else if (target.id === "delete-all") {
+        checkModal();
+    }
+    else if (target.classList.contains("fa-trash-can")) {
+        myLibrary.splice(tr, 1);
+    }
+    else if (target.classList.contains("fa-circle-check")) {
+        target.classList.remove("fa-circle-check");
+        target.classList.add("fa-circle-xmark");
+        myLibrary[tr].read = false;
+    }
+    else if (target.classList.contains("fa-circle-xmark")) {
+        target.classList.remove("fa-circle-xmark");
+        target.classList.add("fa-circle-check");
+        myLibrary[tr].read = true;
+    }
+   });
+}
+
+displayStats();
+displayBooks();
+userControl();

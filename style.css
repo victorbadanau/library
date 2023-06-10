@@ -66,29 +66,52 @@ header h1 {
 /* Main */
 main {
    display: grid;
-   grid-template-rows: 8% 1fr;
+   grid-template-rows: 4em 1fr;
 }
 
-main table {
+table {
+   overflow-y: scroll;
+   border-collapse: collapse;
+   width: 80%;
    padding: 1em;
    margin: 1em;
    align-self: start;
-   border: 1px solid black;
+   justify-self: center;
    font-family: "main", Impact, 'Arial Narrow Bold', sans-serif;
+}
+
+table thead .table-head {
+   background-color: lightskyblue;
+}
+
+tbody tr {
+   border-bottom: 0.15em solid lightskyblue;
+}
+
+th {
+   padding: 1em;
+}
+
+td {
+   text-align: center;
+   padding: 0.75em;
 }
 
 i.fa-circle-check {
    color: green;
+   letter-spacing: 0.1em;
 }
 
 i.fa-circle-xmark, i.fa-trash-can {
    color: red;
+   letter-spacing: 0.1em;
 }
 
 .info {
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
+  justify-content: center;
+  gap: 3em;
 }
 
 .info > * {
@@ -120,30 +143,45 @@ button.delete-all {
 }
 
 .modal {
-   display: flex;
    background-color: lightgray;
    border-radius: 1em;
    height: 400px;
    width: 300px;
    position: fixed;
    z-index: 1;
-   top: calc(50% - 200px);
-   left: calc(50% - 150px);
+   top: 50%;
+   left: 50%;
    font-family: "main", Impact, 'Arial Narrow Bold', sans-serif;
-   display: none;
+   transform: translate(-50%, -50%) scale(0);
+   transition: 0.2s ease-in-out;
 }
 
 .modal.active {
    transform: translate(-50%, -50%) scale(1);
  }
 
-.addBookForm {
-   width: 100%;
+ .add-book-form {
    display: flex;
    flex-direction: column;
+   width: 100%;
+   height: 100%;
    justify-content: space-evenly;
    align-items: center;
 }
+
+ .overlay {
+   position: fixed;
+   top: 0;
+   left: 0;
+   display: none;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.5);
+ }
+ 
+ .overlay.active {
+   display: block;
+ }
 
 .input {
    outline: none;

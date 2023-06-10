@@ -19,36 +19,42 @@
 
     <main>
         <div class="info">
-            <button class="add-book">+ ADD BOOK</button>
+            <button type="button" class="add-book" id="add-book">ADD BOOK</button>
             <p>READ: <span class="count books-read"></span></p>
             <p>NOT READ: <span class="count books-not-read"></span></p>
             <p>TOTAL: <span class="count books-total"></span></p>
-            <button type="button" class="delete-all">DELETE ALL</button>
+            <button type="button" class="delete-all" id="delete-all">DELETE ALL</button>
         </div>
         
         <table class="book-table">
-            <tr class="table-header">
-                <th>TITLE</th>
-                <th>AUTHOR</th>
-                <th>PAGES</th>
-                <th>STATUS</th>
-                <th>REMOVE</th>
-            </tr>
+            <thead>
+                <tr class="table-head">
+                    <th>TITLE</th>
+                    <th>AUTHOR</th>
+                    <th>PAGES</th>
+                    <th>STATUS</th>
+                    <th>REMOVE</th>
+                </tr>
+            </thead>
+            <tbody class="table-body">
+                <!-- books go here -->
+            </tbody>
         </table>
        
         <div class="modal">
-            <form action="#" method="post" class="addBookForm">
+            <form action="#" method="post" class="add-book-form" id="addBookForm">
                 <h3>Add new book</h3>
                 <input type="text" class="input" id="title" placeholder="Title" maxlength="100" required>
                 <input type="text" class="input" id="author" placeholder="Author" maxlength="50" required>
                 <input type="number" class="input" id="pages" placeholder="Pages" min="1" max="1000" required>
                 <div class="is-read">
                     <label for="is-read">Have you read it?</label>
-                    <input type="checkbox" class="checkbox" id="isRead">
+                    <input type="checkbox" class="checkbox" id="checkbox">
                 </div>
-                <button type="submit" class="submit-book">Submit</button>
+                <button type="button" class="submit-book" id="submit-book">Submit</button>
             </form>
         </div>
+        <div class="overlay" id="overlay"></div>
     </main>
 
     <footer>
