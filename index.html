@@ -18,31 +18,37 @@
     </header>
 
     <main>
-        <section class="main">
-            <table class="book-table">
-                <tr class="table-header">
-                    <th>TITLE</th>
-                    <th>AUTHOR</th>
-                    <th>PAGES</th>
-                    <th>STATUS</th>
-                    <th>REMOVE</th>
-                </tr>
-            </table>
-            <div class="info">
-                <button class="add-book">+ ADD BOOK</button>
-                <p>READ:</p>
-                <span class="count books-read"></span>  
-                <!--<i class="fa-regular fa-circle-check"></i>
-                    <i class="fa-regular fa-circle-xmark"></i>
-                    <i class="fa-regular fa-trash-can"></i>
-                -->
-                <p>NOT READ:</p>
-                <span class="count books-not-read"></span>
-                <p>TOTAL:</p>
-                <span class="count books-total"></span>
-                <button type="button" class="delete-all">DELETE ALL BOOKS</button>
-            </div>
-        </section>
+        <div class="info">
+            <button class="add-book">+ ADD BOOK</button>
+            <p>READ: <span class="count books-read"></span></p>
+            <p>NOT READ: <span class="count books-not-read"></span></p>
+            <p>TOTAL: <span class="count books-total"></span></p>
+            <button type="button" class="delete-all">DELETE ALL</button>
+        </div>
+        
+        <table class="book-table">
+            <tr class="table-header">
+                <th>TITLE</th>
+                <th>AUTHOR</th>
+                <th>PAGES</th>
+                <th>STATUS</th>
+                <th>REMOVE</th>
+            </tr>
+        </table>
+       
+        <div class="modal">
+            <form action="#" method="post" class="addBookForm">
+                <h3>Add new book</h3>
+                <input type="text" class="input" id="title" placeholder="Title" maxlength="100" required>
+                <input type="text" class="input" id="author" placeholder="Author" maxlength="50" required>
+                <input type="number" class="input" id="pages" placeholder="Pages" min="1" max="1000" required>
+                <div class="is-read">
+                    <label for="is-read">Have you read it?</label>
+                    <input type="checkbox" class="checkbox" id="isRead">
+                </div>
+                <button type="submit" class="submit-book">Submit</button>
+            </form>
+        </div>
     </main>
 
     <footer>

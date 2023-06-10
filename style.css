@@ -1,18 +1,18 @@
 /* Header font text */
 @font-face {
-   font-family: "MarcellusSC";
+   font-family: "header";
    src: url(fonts/MarcellusSC.ttf);
-}
-
-/* main font text */
-@font-face {
-   font-family: "Quicksand";
-   src: url(fonts/Quicksand.ttf);
 }
 
 /* book font text */
 @font-face {
-   font-family: "LibreFranklin";
+   font-family: "book";
+   src: url(fonts/Quicksand.ttf);
+}
+
+/* main font text */
+@font-face {
+   font-family: "main";
    src: url(fonts/LibreFranklin.ttf);
 }
 
@@ -20,6 +20,22 @@
 :root {
    --white: #F7F1F0;
    --cream: #E9C1AF;
+}
+
+button,
+input {
+  border: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+input[type = 'text'],
+input[type = 'number'] {
+  cursor: text;
 }
 
 body {
@@ -39,7 +55,7 @@ header {
    justify-content: center;
    align-content: center;
    font-size: 1.25em;
-   font-family: "MarcellusSC", Impact, 'Arial Narrow Bold', sans-serif;
+   font-family: "header", Impact, 'Arial Narrow Bold', sans-serif;
 }
 
 header h1 {
@@ -50,6 +66,7 @@ header h1 {
 /* Main */
 main {
    display: grid;
+   grid-template-rows: 8% 1fr;
 }
 
 main table {
@@ -57,6 +74,7 @@ main table {
    margin: 1em;
    align-self: start;
    border: 1px solid black;
+   font-family: "main", Impact, 'Arial Narrow Bold', sans-serif;
 }
 
 i.fa-circle-check {
@@ -67,21 +85,15 @@ i.fa-circle-xmark, i.fa-trash-can {
    color: red;
 }
 
-.main {
-   display: grid;
-   grid-template-columns: 80% 1fr;
-}
-
 .info {
-   justify-self: center;
-   align-self: center;
-   display: grid;
-   grid-template-columns: 3fr 1fr;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .info > * {
-   padding: 0.25em 0.75em;
    font-weight: 600;
+   font-family: "main", Impact, 'Arial Narrow Bold', sans-serif;
 }
 
 button.add-book {
@@ -91,9 +103,6 @@ button.add-book {
    border-radius: 0.75em;
    width: fit-content;
    height: fit-content;
-   justify-self: center;
-   align-self: center;
-   grid-column: span 2;
    background-color: lightgreen;
 }
 
@@ -103,11 +112,70 @@ button.add-book {
 }
 
 button.delete-all {
-  grid-column: span 2;
-  padding: 0.75em 1em;
+  padding: 0.75em 1.5em;
   border-radius: 0.75em;
+  width: fit-content;
+  height: fit-content;
   background-color: lightcoral;
 }
+
+.modal {
+   display: flex;
+   background-color: lightgray;
+   border-radius: 1em;
+   height: 400px;
+   width: 300px;
+   position: fixed;
+   z-index: 1;
+   top: calc(50% - 200px);
+   left: calc(50% - 150px);
+   font-family: "main", Impact, 'Arial Narrow Bold', sans-serif;
+   display: none;
+}
+
+.modal.active {
+   transform: translate(-50%, -50%) scale(1);
+ }
+
+.addBookForm {
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+   align-items: center;
+}
+
+.input {
+   outline: none;
+   border: 0;
+   width: 75%;
+   height: 1em;
+   padding: 0.75em;
+   border-radius: 0.5em;
+   font-family: "book", Impact, 'Arial Narrow Bold', sans-serif;
+}
+
+.is-read > * {
+   padding: 0.75em;
+}
+.is-read {
+   display: flex;
+   align-items: center;
+}
+
+.checkbox {
+   width: 20px;
+   height: 20px;
+   margin-top: 4px;
+   accent-color: white;
+}
+
+.submit-book {
+   padding: 0.75em 2em;
+   border-radius: 0.5em;
+   background-color: lightgreen;
+}
+
 
 /* Footer */
 footer {
