@@ -1,6 +1,6 @@
 # The Odin Project Javascript
 ##  Project Library
-    A small Library app, created with **HTML**, **CSS** and **JavaScript**. It's a "homework" project from The Odin Project [curriculum](https://www.theodinproject.com/courses/javascript/lessons/library).
+A small Library app, created with **HTML**, **CSS** and **JavaScript**. It's a "homework" project from The Odin Project [curriculum](https://www.theodinproject.com/courses/javascript/lessons/library).
 
 🔗 **Live preview** of the project is [here](https://victorbadanau.github.io/library).
 
